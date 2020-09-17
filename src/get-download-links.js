@@ -56,7 +56,7 @@ const readDownloadList = async (downloadUrl) => {
   try {
     fs.writeFile(filePath, downloadList, (err) => {
       if (err) console.log(`Error: ${err.message}`)
-      console.log('File created.')
+      console.log(`Download links written on\n${path.resolve(__dirname, '..', 'downloadlist.txt')}\n`)
     })
   } catch (err) {
     console.log(err.message)
