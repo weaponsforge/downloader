@@ -35,7 +35,7 @@ const getDownloadURLS = async (downloadUrl) => {
     const cmd = `wget -c http://datasets.pacb.com.s3.amazonaws.com/${obj.ListBucketResult.Contents[0].Key}`
 
     obj.ListBucketResult.Contents.forEach(item => {
-      urls += `${baseUrl}//${item.Key}\n`
+      urls += `${baseUrl}/${item.Key}\n`
     })
   } catch (err) {
     console.log(err)

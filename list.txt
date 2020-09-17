@@ -1,3 +1,0 @@
-http://localhost:3000/files/one.txt
-http://localhost:3000/files/two.txt
-http://localhost:3000/files/three.txt
