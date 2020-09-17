@@ -70,19 +70,26 @@ const writeDownloadURLS = async (downloadUrl) => {
 const compressedDownload = async (downloadUrl) => {
   const downloadList = await fetchDownloadURLS(downloadUrl)
   const list = downloadList.split('\n')
+  let cmdStr = '#!/bin/bash\n\n'
 
   try {
     for (let i = 0; i < list.length; i += 1) {
       const filename = list[i].substr(list[i].lastIndexOf('/')+1, list[i].length-1)
-      const cmd = `wget -O - ${list[i]}|gzip -c > ${filename}.gz`
-      execDownload(cmd)
+      const cmd = `wget -P files/ -O - ${list[i]}|gzip -c > ${filename}.gz`
+      cmdStr += cmd + '\n'
+    }
+
+    try {
+      fs.writeFileSync(path.join(__dirname, '..', 'downloadlist'), cmds)
+      console.log(`Created download list script.\n`)
+    } catch (err) {
+      console.log(err.message)
     }
   } catch (err) {
     console.log(err.message)
   }
 }
 
-// compressedDownload('http://datasets.pacb.com.s3.amazonaws.com/?prefix=2014/Arabidopsis/raw')
 module.exports = {
   writeDownloadURLS,
   compressedDownload
