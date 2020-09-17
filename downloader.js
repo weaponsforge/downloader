@@ -1,23 +1,28 @@
+const axios = require('axios')
 const fs = require('fs')
 const path = require('path')
 const exec = require('child_process').exec
+const parser = require('fast-xml-parser')
 
-const readDownloadList = () => {
-  const list = fs.readFileSync(path.join(__dirname, '/list.txt'), 'utf8')
-  console.log(list)
-  const dlList = list.split('\n')
-  console.log(dlList)
+const readDownloadList = async () => {
+  // const list = fs.readFileSync(path.join(__dirname, '/list.txt'), 'utf8')
+  // const dlList = list.split('\n')
 
-  for (let i=0; i < dlList.length; i += 1) {
-    const cmd = `wget -c ${dlList[i]}`
-    exec(cmd, (err, stdout, stderr) => {
+  try {
+    const xml = await axios.get('http://datasets.pacb.com.s3.amazonaws.com/?prefix=2014/Arabidopsis/raw')
+    const obj = parser.parse(xml.data, true)
+    const cmd = `wget -c http://datasets.pacb.com.s3.amazonaws.com/${obj.ListBucketResult.Contents[0].Key}`
+    console.log(`Downloading ${obj.ListBucketResult.Contents[0].Size} B\n${url}`)
+
+    exec(cmd, (err, data) => {
       if (err) {
-        console.log(`error: ${err}`)
+        console.log(`Download error: ${err.message}`)
       } else {
-        console.log(`out: ${stdout}`)
-        console.log(`stderr: ${stderr}`)
+        console.log('DONE')
       }
     })
+  } catch (err) {
+    console.log(err)
   }
 }
 

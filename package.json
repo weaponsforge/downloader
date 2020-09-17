@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/weaponsforge/downloader#readme",
   "devDependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "fast-xml-parser": "^3.17.4"
   }
 }
