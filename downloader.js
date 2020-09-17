@@ -12,7 +12,7 @@ const readDownloadList = async () => {
     const xml = await axios.get('http://datasets.pacb.com.s3.amazonaws.com/?prefix=2014/Arabidopsis/raw')
     const obj = parser.parse(xml.data, true)
     const cmd = `wget -c http://datasets.pacb.com.s3.amazonaws.com/${obj.ListBucketResult.Contents[0].Key}`
-    console.log(`Downloading ${obj.ListBucketResult.Contents[0].Size} B\n${url}`)
+    console.log(`Downloading ${obj.ListBucketResult.Contents[0].Size} B\n${cmd}`)
 
     exec(cmd, (err, data) => {
       if (err) {
