@@ -80,7 +80,7 @@ const compressedDownload = async (downloadUrl) => {
     }
 
     try {
-      fs.writeFileSync(path.join(__dirname, '..', 'downloadlist'), cmds)
+      fs.writeFileSync(path.join(__dirname, '..', 'downloadlist'), cmdStr)
       console.log(`Created download list script.\n`)
     } catch (err) {
       console.log(err.message)
