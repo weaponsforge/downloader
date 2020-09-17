@@ -1,4 +1,5 @@
 #!/bin/bash
 
 npm run fetch-download-urls
+mkdir files
 wget -i downloadlist.txt
