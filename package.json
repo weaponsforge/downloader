@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "fetch-download-urls": "node src/dl-full.js",
-    "download-full": "npm run fetch-download-urls && mkdir files && wget -P files/ -i downloadlist.txt",
+    "download-full": "npm run fetch-download-urls && wget -P files/ -i downloadlist.txt",
     "download-compressed": "echo > downloadlist && sudo chmod u+x downloadlist && node src/dl-compressed && ./downloadlist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

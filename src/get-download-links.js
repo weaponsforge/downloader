@@ -49,6 +49,12 @@ const fetchDownloadURLS = async (downloadUrl) => {
  * http://datasets.pacb.com.s3.amazonaws.com data sets
  */
 const writeDownloadURLS = async (downloadUrl) => {
+  // Create a download directory
+  const downloadDir = path.join(__dirname, '..', '/files')
+  if (!fs.existsSync(downloadDir)) {
+    fs.mkdirSync(downloadDir)
+  }
+
   const filePath = path.join(__dirname, '..', '/downloadlist.txt')
   const downloadList = await fetchDownloadURLS(downloadUrl)
 
@@ -68,18 +74,27 @@ const writeDownloadURLS = async (downloadUrl) => {
  * http://datasets.pacb.com.s3.amazonaws.com data sets
  */
 const compressedDownload = async (downloadUrl) => {
+  // Create a download directory
+  const downloadDir = path.join(__dirname, '..', '/files')
+  if (!fs.existsSync(downloadDir)) {
+    fs.mkdirSync(downloadDir)
+  }
+
+  // Get files download URLs
   const downloadList = await fetchDownloadURLS(downloadUrl)
   const list = downloadList.split('\n')
   let cmdStr = '#!/bin/bash\n\n'
 
   try {
+    // Construct a wget file download URL with output in compressed form
     for (let i = 0; i < list.length; i += 1) {
       const filename = list[i].substr(list[i].lastIndexOf('/')+1, list[i].length-1)
-      const cmd = `wget -P files/ -O - ${list[i]}|gzip -c > ${filename}.gz`
+      const cmd = `wget -O - ${list[i]}|gzip -c > files/${filename}.gz`
       cmdStr += cmd + '\n'
     }
 
     try {
+      // Write the files download URLs for wget in a bash script
       fs.writeFileSync(path.join(__dirname, '..', 'downloadlist'), cmdStr)
       console.log(`Created download list script.\n`)
     } catch (err) {
