@@ -1,3 +1,4 @@
 require('dotenv').config()
-const { compressedDownload } = require('./get-download-links')
-compressedDownload(process.env.DOWNLOAD_PAGE_XML_URL)
+const { writeDownloadScript } = require('./get-download-links')
+writeDownloadScript(process.env.DOWNLOAD_PAGE_XML_URL)
+// Should run ./downloadlist

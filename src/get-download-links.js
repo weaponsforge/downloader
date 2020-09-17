@@ -69,11 +69,11 @@ const writeDownloadURLS = async (downloadUrl) => {
 }
 
 /**
- * Download the files listed in "downloadUrl"'s XML response in a compressed form
+ * Format and write the download URL's from http://datasets.pacb.com.s3.amazonaws.com data sets into a wget bash script
  * @param {String} downloadUrl URL that returns an XML response of download links from 
  * http://datasets.pacb.com.s3.amazonaws.com data sets
  */
-const compressedDownload = async (downloadUrl) => {
+const writeDownloadScript = async (downloadUrl) => {
   // Create a download directory
   const downloadDir = path.join(__dirname, '..', '/files')
   if (!fs.existsSync(downloadDir)) {
@@ -107,5 +107,5 @@ const compressedDownload = async (downloadUrl) => {
 
 module.exports = {
   writeDownloadURLS,
-  compressedDownload
+  writeDownloadScript
 }
