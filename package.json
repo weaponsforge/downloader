@@ -1,0 +1,23 @@
+{
+  "name": "downloader",
+  "version": "1.0.0",
+  "description": "> Download files by url.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weaponsforge/downloader.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weaponsforge/downloader/issues"
+  },
+  "homepage": "https://github.com/weaponsforge/downloader#readme",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
