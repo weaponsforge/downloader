@@ -1,0 +1,6 @@
+#!/bin/bash
+
+npm run fetch-download-urls
+mkdir files
+wget -P files/ -i downloadlist.txt
+
