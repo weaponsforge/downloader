@@ -32,7 +32,6 @@ const getDownloadURLS = async (downloadUrl) => {
   try {
     const xml = await axios.get(downloadUrl)
     const obj = parser.parse(xml.data, true)
-    const cmd = `wget -c http://datasets.pacb.com.s3.amazonaws.com/${obj.ListBucketResult.Contents[0].Key}`
 
     obj.ListBucketResult.Contents.forEach(item => {
       urls += `${baseUrl}/${item.Key}\n`
