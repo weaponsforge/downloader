@@ -62,4 +62,4 @@ const readDownloadList = async (downloadUrl) => {
   }
 }
 
-readDownloadList('http://datasets.pacb.com.s3.amazonaws.com/?prefix=2014/Arabidopsis/raw')
+readDownloadList('<YOUR_DOWNLOAD_PAGE_XML_URL_HERE>')
