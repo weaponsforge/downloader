@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "fetch-download-urls": "node src/get-download-links.js",
+    "fetch-download-urls": "node src/dl-full.js",
+    "download-full": "npm run fetch-download-urls && mkdir files && wget -P files/ -i downloadlist.txt",
+    "download-compressed": "node src/dl-compressed",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

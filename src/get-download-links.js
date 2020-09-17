@@ -23,7 +23,7 @@ const execDownload = (cmd) => {
  * @param {String} downloadUrl
  * @returns {String} download urls
  */
-const getDownloadURLS = async (downloadUrl) => {
+const fetchDownloadURLS = async (downloadUrl) => {
   let urls = ''
   const a = document.createElement('a')
   a.href = downloadUrl
@@ -48,9 +48,9 @@ const getDownloadURLS = async (downloadUrl) => {
  * @param {String} downloadUrl URL that returns an XML response of download links from 
  * http://datasets.pacb.com.s3.amazonaws.com data sets
  */
-const readDownloadList = async (downloadUrl) => {
+const writeDownloadURLS = async (downloadUrl) => {
   const filePath = path.join(__dirname, '..', '/downloadlist.txt')
-  const downloadList = await getDownloadURLS(downloadUrl)
+  const downloadList = await fetchDownloadURLS(downloadUrl)
 
   try {
     fs.writeFile(filePath, downloadList, (err) => {
@@ -62,4 +62,28 @@ const readDownloadList = async (downloadUrl) => {
   }
 }
 
-readDownloadList('<YOUR_DOWNLOAD_PAGE_XML_URL_HERE>')
+/**
+ * Download the files listed in "downloadUrl"'s XML response in a compressed form
+ * @param {String} downloadUrl URL that returns an XML response of download links from 
+ * http://datasets.pacb.com.s3.amazonaws.com data sets
+ */
+const compressedDownload = async (downloadUrl) => {
+  const downloadList = await fetchDownloadURLS(downloadUrl)
+  const list = downloadList.split('\n')
+
+  try {
+    for (let i = 0; i < list.length; i += 1) {
+      const filename = list[i].substr(list[i].lastIndexOf('/')+1, list[i].length-1)
+      const cmd = `wget -O - ${list[i]}|gzip -c > ${filename}.gz`
+      execDownload(cmd)
+    }
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+// compressedDownload('http://datasets.pacb.com.s3.amazonaws.com/?prefix=2014/Arabidopsis/raw')
+module.exports = {
+  writeDownloadURLS,
+  compressedDownload
+}
