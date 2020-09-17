@@ -7,7 +7,7 @@
 
 The following requirements are used for this project.
 
-1. Ubuntu 18.04
+1. Ubuntu 18.04 (or other Linux OS)
 	- wget - version 1.19.4
 2. NodeJS
 	- version 12.18.4
@@ -18,24 +18,47 @@ The following requirements are used for this project.
 
 1. Clone this repository.  
 `git clone https://github.com/weaponsforge/downloader.git`
-
-2. Make the `download` script executable.  
-`sudo chmod u+x download`
-
 2. Install dependencies.  
 `npm install`
-
+3. Make the download bash scripts executable.  
+	- `sudo chmod u+x download-full`
+	- `sudo chmod u+x download-compressed`
+4. Source out the `.env.example` file into a `.env` file.
+	- Open the `.env` file.
+	- Replace `DOWNLOAD_PAGE_XML_URL` with your target **http://datasets.pacb.com.s3.amazonaws.com/** data set page's **XML** download URL, which contains the full list of file download URLS in XML format.
+		- this can be viewed from the Chrome dev tools XHR tab while loading the page.
 
 ## Usage
 
-1. Obtain the **XHR link** which returns an **XML response** containing all the download links from any one of the **http://datasets.pacb.com.s3.amazonaws.com/** data sets.
-	- this can be viewed from the Chrome dev tools XHR tab while loading the page.
-2. Open `/src/get-download-links.js`.
-	- Replace `DOWNLOAD_PAGE_XML_URL_HERE` with a target download link from **#1**.
-3. Start the batch files download. 
-	- Navigate to the project's root directory using the terminal
-	- Run `./download`
-4. Wait for all files to finish download.
+- Download all files in a compressed format. Run any of the (2) commands:
+	- `npm run download-compressed`
+	- `./download-compressed`
+- Download all files in raw, uncompressed format. Run any of the (2) commands:
+	- `npm run download-full`
+	- `./download-full`
+
+## Available Scripts
+
+### npm download-compressed
+
+- Downloads all data set files in a compressed `.gz` format.
+- Downloaded files are stored in the `/downloader/files` directory.
+- Also available as a bash script `./download-compressed`
+
+### npm download-full
+
+- Downloads all data set files in their raw format.
+- Downloaded files are stored in the `/downloader/files` directory.
+- Also available as a bash script `./download-full`
+
+### fetch-download-urls
+
+Download the list of file download URLS into a `downloadlist.txt` file.
+
+### start
+
+Starts a local web server on `http://localhost:3000` for testing purposes.
+
 
 @weaponsforge  
 20200817
