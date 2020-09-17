@@ -31,7 +31,7 @@ The following requirements are used for this project.
 1. Obtain the **XHR link** which returns an **XML response** containing all the download links from any one of the **http://datasets.pacb.com.s3.amazonaws.com/** data sets.
 	- this can be viewed from the Chrome dev tools XHR tab while loading the page.
 2. Open `/src/get-download-links.js`.
-	- Replace `YOUR_DOWNLOAD_PAGE_XML_URL_HERE` with a target download link from **#1**.
+	- Replace `DOWNLOAD_PAGE_XML_URL_HERE` with a target download link from **#1**.
 3. Start the batch files download. 
 	- Navigate to the project's root directory using the terminal
 	- Run `./download`

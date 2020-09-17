@@ -1,2 +1,3 @@
+require('dotenv').config()
 const { compressedDownload } = require('./get-download-links')
-compressedDownload('YOUR_DOWNLOAD_PAGE_XML_URL_HERE')
+compressedDownload(process.env.DOWNLOAD_PAGE_XML_URL)

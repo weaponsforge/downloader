@@ -3,3 +3,4 @@ downloadlist
 files/
 *.txt
 *.h5
+.env
