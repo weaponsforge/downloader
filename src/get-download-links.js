@@ -50,7 +50,7 @@ const getDownloadURLS = async (downloadUrl) => {
  * http://datasets.pacb.com.s3.amazonaws.com data sets
  */
 const readDownloadList = async (downloadUrl) => {
-  const filePath = path.join(__dirname, '/downloadlist.txt')
+  const filePath = path.join(__dirname, '..', '/downloadlist.txt')
   const downloadList = await getDownloadURLS(downloadUrl)
 
   try {
